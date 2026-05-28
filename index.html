@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="ko" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>장동현 | 노랑풍선 CRM 마케터 포트폴리오</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+
+        :root {
+            --sk-black: #111827;
+            --sk-white: #FFFFFF;
+            --sk-grey: #F5F5F5;
+            --sk-border: #EEEEEE;
+            /* 노랑풍선 이력서 테마 포인트 컬러(오렌지/옐로우) 반영 */
+            --cj-red: #D97706; 
+        }
+
+        body {
+            font-family: "Pretendard", sans-serif;
+            background-color: var(--sk-white);
+            color: var(--sk-black);
+            letter-spacing: -0.03em;
+        }
+
+        .font-inter {
+            font-family: "Inter", sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        /* 컬러 매핑 클래스 */
+        .text-accent { color: var(--cj-red); }
+        .bg-accent { background-color: var(--cj-red); }
+        .border-accent { border-color: var(--cj-red); }
+        .hover\:text-accent:hover { color: var(--cj-red) !important; }
+
+        .cyber-card {
+            background: var(--sk-white);
+            border: 1px solid var(--sk-border);
+            transition: all 0.3s ease;
+            box-shadow: none;
+        }
+
+        .cyber-card:hover {
+            border-color: var(--sk-black);
+            transform: translateY(-2px);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--sk-grey);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #CCCCCC;
+            border-radius: 0px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--sk-black);
+        }
+
+        .sk-border {
+            border-color: var(--sk-border);
+        }
+
+        /* 이미지 캡션: 세련된 한 줄 라벨 */
+        .img-caption {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #f9fafb;
+            border-top: 1px solid var(--sk-border);
+            font-size: 11px;
+            color: #6b7280;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            line-height: 1.4;
+        }
+        .img-caption::before {
+            content: '▸';
+            color: var(--cj-red);
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--cj-red);
+            z-index: 100;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(255,255,255,0.98);
+            z-index: 60;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .mobile-menu.open { display: flex; }
+        .hamburger { display: none; cursor: pointer; background: none; border: none; }
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+        }
+
+        /* KPI Counter */
+        .kpi-counter {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-black selection:text-white">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span class="font-inter font-extrabold text-xl tracking-tight text-black uppercase">Donghyun <span
+                    class="text-accent underline decoration-1 underline-offset-4">Jang</span></span>
+            <div class="hidden md:flex space-x-8 text-[10px] font-inter tracking-[0.2em] text-gray-400 font-bold uppercase">
+                <a href="#intro" class="hover:text-black transition">01. Intro</a>
+                <a href="#crm" class="hover:text-accent transition">02. CRM Campaign</a>
+                <a href="#frontline" class="hover:text-accent transition">03. Field VOC & CX</a>
+                <a href="#ai-ops" class="hover:text-accent transition">04. AI & Automation</a>
+                <a href="#archive" class="hover:text-black transition">05. Process & Comms</a>
+            </div>
+            <button class="hamburger md:hidden text-black" id="hamburgerBtn" aria-label="메뉴 열기">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+        </div>
+    </nav>
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="mobileMenuClose" class="absolute top-6 right-8 text-3xl text-black">&times;</button>
+        <a href="#intro" class="text-2xl font-bold text-black hover:text-accent">01. Intro</a>
+        <a href="#crm" class="text-2xl font-bold text-black hover:text-accent">02. CRM Campaign</a>
+        <a href="#frontline" class="text-2xl font-bold text-black hover:text-accent">03. Field VOC & CX</a>
+        <a href="#ai-ops" class="text-2xl font-bold text-black hover:text-accent">04. AI & Automation</a>
+        <a href="#archive" class="text-2xl font-bold text-black hover:text-accent">05. Process & Comms</a>
+    </div>
+    <section id="intro" class="pt-32 pb-20 px-6 max-w-7xl mx-auto min-h-screen flex flex-col justify-center border-b border-gray-100">
+        <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+            <div class="w-48 h-48 md:w-72 md:h-72 flex-shrink-0 overflow-hidden border border-gray-100 sk-border rounded-none p-1 bg-white relative">
+                <img src="./assets/profile.jpg" class="w-full h-full object-cover transition duration-700" alt="프로필 사진" />
+            </div>
+
+            <div class="flex-1 space-y-8">
+                <div class="inline-block px-3 py-1 bg-accent text-white text-[9px] font-inter font-bold tracking-[0.3em] uppercase mb-2">
+                    노랑풍선 CRM 마케터 CANDIDATE
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold text-black leading-[1.1] tracking-tighter break-keep mb-6">
+                    데이터 기반의 퍼널 최적화와<br />
+                    정교한 시나리오 설계로 <span class="text-accent underline decoration-1 underline-offset-8 decoration-accent">캠페인 전환율을 높이는</span> 장동현입니다.
+                </h1>
+                <p class="text-xl text-gray-600 leading-relaxed max-w-2xl font-light break-keep">
+                    뷰티, 건기식, 패션 등 다채로운 도메인을 아우르며 데이터 기반으로 퍼널 전환 시나리오를 설계해왔습니다. 40여 개 브랜드의 고객 데이터를 다뤄본 타겟팅 감각을 바탕으로, 노랑풍선의 CRM 마케팅 직무에서 고객의 발길이 끊이지 않는 맞춤형 여행 시나리오를 정교하게 구축하고 싶어 지원합니다.
+                </p>
+                <div class="flex flex-wrap gap-8 mt-12 pt-8 border-t border-gray-100">
+                    <div class="text-center">
+                        <span class="block text-4xl font-inter font-black text-accent kpi-counter" data-counter data-target="985">0</span>
+                        <span class="block text-[10px] text-gray-400 font-inter uppercase tracking-widest mt-1">CRM 캠페인 ROAS %</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-4xl font-inter font-black text-black kpi-counter" data-counter data-target="40">0</span>
+                        <span class="block text-[10px] text-gray-400 font-inter uppercase tracking-widest mt-1">Brands Managed</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-4xl font-inter font-black text-black kpi-counter" data-counter data-target="400">0</span>
+                        <span class="block text-[10px] text-gray-400 font-inter uppercase tracking-widest mt-1">Campaign CTR % ↑</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-4xl font-inter font-black text-black kpi-counter" data-counter data-target="0">0</span>
+                        <span class="block text-[10px] text-gray-400 font-inter uppercase tracking-widest mt-1">Deploy Errors</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="crm" class="py-24 px-6 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16">
+                <span class="text-accent font-inter font-bold text-[9px] tracking-[0.3em] block mb-3 uppercase">02. CRM Campaign & Personalization</span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-black tracking-tighter">SaaS CRM 기반 세그먼트 정의 및 시나리오 운영</h2>
+                <p class="text-sm text-gray-400 mt-4 font-light">CRM 솔루션(SnapPush)을 활용해 고객 행동 데이터를 분석하고, 맞춤형 타겟팅과 자동화 시나리오를 설계하여 전환율을 개선한 실무 케이스입니다.</p>
+            </div>
+
+            <div class="cyber-card border border-gray-100 overflow-hidden bg-white sk-border mb-10">
+                <div class="flex flex-col lg:flex-row">
+                    <div class="w-full lg:w-[55%] border-b lg:border-b-0 lg:border-r border-gray-100 bg-gray-50 flex flex-col gap-px">
+                        <div class="relative group cursor-pointer overflow-hidden bg-white flex-1 min-h-[220px]">
+                            <img src="./assets/crm-card1-main.png"
+                                class="w-full h-full object-contain transition duration-700 p-4"
+                                alt="CRM 시나리오 타겟팅 플로우차트" />
+                        </div>
+                        <div class="img-caption">분기별 파트너사 미팅 시 퍼널 내 병목 구간을 진단하고, 맞춤형 타겟팅 플로우를 제안하기 위해 직접 기획한 시나리오 자료</div>
+                        <div class="border-t border-gray-100 bg-white relative group cursor-pointer overflow-hidden min-h-[160px]">
+                            <img src="./assets/crm-card1-sub.png"
+                                class="w-full h-full object-contain transition duration-700 p-4"
+                                alt="고객 행동 기반 세그먼트별 메시지 타겟팅 구조" />
+                        </div>
+                        <div class="img-caption">고객 행동(신규·관심·이탈)에 따라 각기 다른 맞춤 메시지를 발송하기 위한 세그먼트 분류 예시</div>
+                    </div>
+                    <div class="w-full lg:w-[45%] p-10 md:p-12 flex flex-col justify-center">
+                        <div class="inline-block px-2 py-1 bg-black text-white text-[9px] font-inter tracking-[0.25em] uppercase mb-5 self-start">Card 01</div>
+                        <h3 class="font-extrabold text-2xl text-black mb-3 tracking-tight leading-snug">
+                            고객 행동 데이터 기반<br />코호트 타겟팅 설계
+                        </h3>
+                        <p class="text-xs text-gray-400 font-inter uppercase tracking-widest mb-8">Segment Definition · CRM Strategy</p>
+                        <div class="space-y-5 text-sm text-gray-600 font-light leading-relaxed">
+                            <p><strong class="text-black font-inter tracking-[0.1em] block mb-1 text-[10px] uppercase">Problem</strong>매체 유입 이후 발생하는 고객 이탈을 방어하고 최종 캠페인 전환율을 높이기 위한 정밀한 타겟팅 전략이 부재했습니다.</p>
+                            <p><strong class="text-black font-inter tracking-[0.1em] block mb-1 text-[10px] uppercase">Action</strong>SaaS CRM 솔루션을 활용하여 고객을 단순 인구통계가 아닌 행동 지표(진성/관심/이탈) 기준 코호트 3개 그룹으로 세분화하고, 동일 고객 중복 발송을 제한하는 '피로도 3일 캡' 정책을 시스템에 적용했습니다.</p>
+                            <div class="pt-5 border-t border-gray-100 space-y-3">
+                                <strong class="text-accent block font-inter tracking-[0.1em] text-[10px] uppercase mb-3">Results</strong>
+                                <div class="flex items-start gap-3">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 flex-shrink-0"></span>
+                                    <span><strong class="text-black">40여 개 커머스 브랜드</strong> 대상 코호트 타겟팅 병렬 운영</span>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 flex-shrink-0"></span>
+                                    <span>뷰티 브랜드 타겟 캠페인 ROAS <strong class="text-black">985%</strong> 달성</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cyber-card border border-gray-100 overflow-hidden bg-white sk-border mb-10">
+                <div class="flex flex-col lg:flex-row-reverse">
+                    <div class="w-full lg:w-[55%] border-b lg:border-b-0 lg:border-l border-gray-100 bg-gray-50 flex flex-col gap-px">
+                        <div class="relative group cursor-pointer overflow-hidden bg-white flex-1 min-h-[220px]">
+                            <img src="./assets/crm-card2-main.png"
+                                class="w-full h-full object-contain transition duration-700 p-4"
+                                alt="세그먼트별 캠페인 ROAS 성과 데이터 테이블" />
+                        </div>
+                        <div class="img-caption">세그먼트 그룹별 캠페인 성과(ROAS, 전환율 등)를 직관적으로 파악하기 위해 추출한 CRM 리포트 테이블</div>
+                        <div class="border-t border-gray-100 bg-white relative group cursor-pointer overflow-hidden min-h-[160px]">
+                            <img src="./assets/crm-card2-sub.png"
+                                class="w-full h-full object-contain transition duration-700 p-4"
+                                alt="타겟 세그먼트별 성과 비교 및 목표 설정" />
+                        </div>
+                        <div class="img-caption">고객 피로도는 낮추고 구매 전환율은 높이기 위한 세분화 타겟팅 설계 및 목표치 기준</div>
+                    </div>
+                    <div class="w-full lg:w-[45%] p-10 md:p-12 flex flex-col justify-center">
+                        <div class="inline-block px-2 py-1 bg-black text-white text-[9px] font-inter tracking-[0.25em] uppercase mb-5 self-start">Card 02</div>
+                        <h3 class="font-extrabold text-2xl text-black mb-3 tracking-tight leading-snug">
+                            타겟 맞춤형 메시지를 통한<br />전환율 및 성과 개선
+                        </h3>
+                        <p class="text-xs text-gray-400 font-inter uppercase tracking-widest mb-8">Personalized Marketing · A/B Test</p>
+                        <div class="space-y-5 text-sm text-gray-600 font-light leading-relaxed">
+                            <p><strong class="text-black font-inter tracking-[0.1em] block mb-1 text-[10px] uppercase">Problem</strong>초기 트래픽 유입 대비 중장기 재방문율 및 결제 전환율 저하 현상이 발생하여 전반적인 마케팅 비용 효율이 떨어지는 상황이었습니다.</p>
+                            <p><strong class="text-black font-inter tracking-[0.1em] block mb-1 text-[10px] uppercase">Action</strong>CRM 대시보드 데이터를 바탕으로 구매 가능성이 높은 진성 고객과 이탈 위험 고객을 선별해 차등화된 메시지를 발송하는 단기 집중 타겟팅 캠페인을 실행했습니다.</p>
+                            <div class="pt-5 border-t border-gray-100 space-y-3">
+                                <strong class="text-accent block font-inter tracking-[0.1em] text-[10px] uppercase mb-3">Results</strong>
+                                <div class="flex items-start gap-3">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 flex-shrink-0"></span>
+                                    <span>타겟 맞춤형 발송으로 기존 캠페인 대비 ROAS <strong class="text-black">+238%p</strong> 개선</span>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 flex-shrink-0"></span>
+                                    <span>패션 브랜드 단기 집중 캠페인 클릭률 <strong class="text-black">400%</strong> 증가 기록</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cyber-card border border-gray-100 overflow-hidden bg-white sk-border">
+                <div class="flex flex-col lg:flex-row">
+                    <div class="w-full lg:w-[55%] border-b lg:border-b-0 lg:border-r border-gray-100 bg-gray-50 flex flex-col gap-px">
+                        <div class="relative group cursor-pointer overflow-hidden bg-white flex-1 min-h-[220px]">
+                            <img src="./assets/crm-card3-main.png"
+                                class="w-full h-full object-contain transition duration-700 p-4"
+                                alt="코호트 기반 재방문율 분석 히트맵" />
+                        </div>
+                        <div class="img-caption">CRM 대시보드를 통해 고객의 이탈 시점을 파악하고 넛지 타이밍을 설계하기 위한 히트맵 데이터</div>
+                        <div class="border-t border-gray-100 bg-white relative group cursor-pointer overflow-hidden min-h-[160px]">
+                            <img src="./assets/crm-card3-sub.png"
+                                class="w-full h-full object-contain transition duration-700 p-4"
+                                alt="자사몰 방문일 분포 및 미구매 고객 현황 데이터" />
+                        </div>
+                        <div class="img-caption">재구매 유도 자동 알림(넛지)의 발송 타이밍을 정교하게 세팅하기 위한 구매 분포 데이터</div>
+                    </div>
+                    <div class="w-full lg:w-[45%] p-10 md:p-12 flex flex-col justify-center">
+                        <div class="inline-block px-2 py-1 bg-black text-white text-[9px] font-inter tracking-[0.25em] uppercase mb-5 self-start">Card 03</div>
+                        <h3 class="font-extrabold text-2xl text-black mb-3 tracking-tight leading-snug">
+                            이탈 방어 시나리오 및<br />조건부 자동 알림(넛지) 설계
+                        </h3>
+                        <p class="text-xs text-gray-400 font-inter uppercase tracking-widest mb-8">Scenario Automation · Retention Defense</p>
+                        <div class="space-y-5 text-sm text-gray-600 font-light leading-relaxed">
+                            <p><strong class="text-black font-inter tracking-[0.1em] block mb-1 text-[10px] uppercase">Problem</strong>무분별한 팝업 노출로 인한 고객 피로도 증가 문제와, 고객이 어느 시점에 이탈하는지 정확히 파악하여 방어할 시나리오가 부족했습니다.</p>
+                            <p><strong class="text-black font-inter tracking-[0.1em] block mb-1 text-[10px] uppercase">Action</strong>유저가 이탈하는 직전 찰나를 캐치하는 조건부 트리거(Exit-Intent) 기반의 3단계 넛지 자동화 시나리오를 새롭게 기획하여 도입하고, 분기별 미팅을 통해 고객사에게 성과를 직접 리포팅했습니다.</p>
+                            <div class="pt-5 border-t border-gray-100 space-y-3">
+                                <strong class="text-accent block font-inter tracking-[0.1em] text-[10px] uppercase mb-3">Results</strong>
+                                <div class="flex items-start gap-3">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 flex-shrink-0"></span>
+                                    <span>건기식 브랜드 캠페인의 핵심 접점 이탈률 <strong class="text-black">12.5%p</strong> 방어 (60% → 47.5%)</span>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 flex-shrink-0"></span>
+                                    <span>데이터 기반 성과 모니터링을 통한 파트너사 신뢰 구축 및 전략 고도화</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="frontline" class="py-24 px-6 max-w-7xl mx-auto border-b border-gray-100 bg-white">
+        <div class="mb-16">
+            <span class="text-accent font-inter font-bold text-[9px] tracking-[0.3em] block mb-3 uppercase">03. Field VOC & CX</span>
+            <h2 class="text-3xl md:text-5xl font-extrabold text-black tracking-tighter">오프라인 현장 VOC 기반 고객 경험 개선</h2>
+        </div>
+
+        <div class="space-y-8">
+            <div class="cyber-card flex flex-col md:flex-row border border-gray-100 overflow-hidden bg-white sk-border">
+                <div class="w-full md:w-1/2 h-80 md:h-auto border-b md:border-b-0 md:border-r border-gray-100 bg-gray-50 grid grid-cols-2 gap-px">
+                    <div class="relative group cursor-pointer overflow-hidden bg-white flex items-center justify-center p-2">
+                        <img src="./assets/stanley-ref-1.jpg" class="w-full h-full object-contain transition duration-700" alt="프로모션 기획안" />
+                    </div>
+                    <div class="relative group cursor-pointer overflow-hidden bg-white flex items-center justify-center p-2">
+                        <img src="./assets/stanley-ref-2.jpg" class="w-full h-full object-cover transition duration-700" alt="현장 VOC 데이터화" />
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 p-10 md:p-12 flex flex-col justify-center">
+                    <h3 class="font-bold text-2xl text-black border-l-4 border-accent pl-5 tracking-tight mb-6">
+                        현장 VOC 수집 및 체험 콘텐츠 기획
+                        <span class="block text-[10px] text-gray-400 font-inter mt-3 font-normal uppercase tracking-[0.2em]">STANLEY BLACK&DECKER — 채널 마케팅 및 고객 응대</span>
+                    </h3>
+                    <div class="space-y-6 text-sm text-gray-600 font-light leading-relaxed">
+                        <p><strong class="text-black font-inter tracking-[0.1em] block mb-2 text-[11px] uppercase">Action:</strong> 디월트 체험센터에서 4,200여 명의 내방 고객을 직접 대면하며 240여 종의 공구를 큐레이션했습니다. 이 현장 경험 속에서 수집한 고객의 목소리(VOC)와 SNS 트렌드를 결합하여, 비수기 방문 하락을 방어하기 위한 '우드 무드등' 체험 콘텐츠를 직접 기획하고 제안했습니다.</p>
+                        <p class="pt-4 border-t border-gray-100"><strong class="text-accent block mb-2 font-inter tracking-[0.1em] text-[11px] uppercase">Result:</strong> 우드 무드등 콘텐츠 도입 후, 비수기 12월 방문 고객 전월 대비 약 1,200명 증대</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cyber-card flex flex-col md:flex-row-reverse border border-gray-100 overflow-hidden bg-white sk-border">
+                <div class="w-full md:w-1/2 h-80 md:h-auto border-b md:border-b-0 md:border-l border-gray-100 bg-gray-50 grid grid-cols-2 gap-px">
+                    <div class="relative group cursor-pointer overflow-hidden bg-white flex items-center justify-center p-2">
+                        <img src="./assets/ikea-ref-1.jpg" class="w-full h-full object-contain transition duration-700" alt="IKEA 매장 시스템" />
+                    </div>
+                    <div class="relative group cursor-pointer overflow-hidden bg-white flex items-center justify-center p-2">
+                        <img src="./assets/ikea-ref-2.jpg" class="w-full h-full object-cover transition duration-700" alt="Red Line 도입 현장" />
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 p-10 md:p-12 flex flex-col justify-center">
+                    <h3 class="font-bold text-2xl text-black border-l-4 border-accent pl-5 tracking-tight mb-6">
+                        직관적 재고 가시성 확보를 위한 트리거 설계
+                        <span class="block text-[10px] text-gray-400 font-inter mt-3 font-normal uppercase tracking-[0.2em]">IKEA Canada — 푸드 마켓 캐셔 및 재고 관리</span>
+                    </h3>
+                    <div class="space-y-6 text-sm text-gray-600 font-light leading-relaxed">
+                        <p><strong class="text-black font-inter tracking-[0.1em] block mb-2 text-[11px] uppercase">Action:</strong> 100% 영어 환경의 다국적 매장에서 캐셔 및 재고 관리를 담당했습니다. 냉동고 재고 보충 시기를 일일이 육안으로 확인해야 하는 비효율을 제거하기 위해, 직관적인 기준선인 레드 라인(Red Line)을 마킹하는 행동 트리거 도입을 제안했습니다.</p>
+                        <p class="pt-4 border-t border-gray-100"><strong class="text-accent block mb-2 font-inter tracking-[0.1em] text-[11px] uppercase">Result:</strong> 동선 낭비 유발하던 현장 순회 확인 비효율 제거 및 실무 리드타임 개선</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="ai-ops" class="py-24 px-6 border-b border-gray-100 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16">
+                <span class="text-black font-inter font-bold text-[9px] tracking-[0.3em] block mb-3 uppercase">04. AI & Data Automation</span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-black mb-6 tracking-tighter">데이터 및 자동화 파이프라인 구축 프로젝트</h2>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                
+                <div class="cyber-card p-8 md:p-10 flex flex-col h-full bg-white sk-border">
+                    <h3 class="text-xl font-bold text-black mb-2 flex justify-between items-center tracking-tight">
+                        PickPilot (해외 커머스 트렌드 자동 수집 파이프라인)
+                        <span class="text-[9px] font-inter text-gray-400 border border-gray-100 px-2 py-1 uppercase tracking-wider">개인 프로젝트 · 구축 완료</span>
+                    </h3>
+                    <p class="text-[11px] font-mono text-gray-500 mb-6 tracking-tight">Tech : n8n, Gemini API, MCP Server, HTML/CSS</p>
+                    <div class="bg-gray-50 border border-gray-100 p-5 mb-8 rounded-none space-y-3 text-[13px] text-gray-600 font-light">
+                        <p><strong class="text-black font-inter tracking-wider uppercase text-[11px]">Problem:</strong> 시장 분석 및 커머스 리뷰 수집 시 수작업 프로세스에 전적으로 의존하여 2~3일의 긴 리드타임이 상시 발생했습니다.</p>
+                        <p><strong class="text-black font-inter tracking-wider uppercase text-[11px]">Action:</strong> n8n 워크플로우 환경에 Rainforest API를 직접 연동하여 해외 리뷰 데이터를 대량 자동 수집하고, MCP 서버를 결합하여 AI가 규칙에 맞게 원 데이터를 직접 가공·분류하도록 모듈화 파이프라인을 구축했습니다.</p>
+                        <p class="pt-3 border-t border-gray-200"><strong class="text-accent font-inter tracking-wider uppercase text-[11px]">Result:</strong> 전체 시스템 1회 구동 설계 구현으로 소싱부터 가공 배포까지의 리드타임을 기존 대비 85% 단축했습니다.</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h4 class="text-[11px] font-bold text-black mb-4 border-l-2 border-black pl-3 uppercase tracking-widest">
+                            Pipeline Architecture
+                        </h4>
+                        <div class="bg-white border border-gray-100 p-1 rounded-none relative group cursor-pointer overflow-hidden sk-border">
+                            <img src="./assets/pickpilot-main.png" class="w-full h-auto object-cover transition duration-700" alt="PickPilot Architecture" />
+                        </div>
+                        <p class="mt-4 text-[13px] text-gray-500 leading-relaxed bg-gray-50 p-4 border-l-2 border-gray-200 font-light">
+                            데이터 소싱부터 가공까지 전 과정을 시스템 1회 구동 수준으로 모듈화 처리했습니다.
+                        </p>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-[11px] font-bold text-black mb-4 border-l-2 border-black pl-3 uppercase tracking-widest">
+                            Output Examples
+                        </h4>
+                        <div class="grid grid-cols-2 gap-2 h-24 md:h-32">
+                            <div class="h-full border border-gray-100 bg-gray-50 relative group cursor-pointer overflow-hidden">
+                                <img src="./assets/pickpilot5.jpg" class="w-full h-full object-cover cursor-pointer hover:scale-105 transition duration-300" alt="Result 1" />
+                            </div>
+                            <div class="h-full border border-gray-100 bg-gray-50 relative group cursor-pointer overflow-hidden">
+                                <img src="./assets/pickpilot6.jpg" class="w-full h-full object-cover cursor-pointer hover:scale-105 transition duration-300" alt="Result 2" />
+                            </div>
+                        </div>
+                        <p class="text-center text-[10px] text-gray-400 mt-3 font-inter tracking-widest uppercase">AI 콘텐츠 자동 생성 결과물</p>
+                    </div>
+                </div>
+
+                <div class="cyber-card p-8 md:p-10 flex flex-col justify-center relative overflow-hidden h-full bg-white">
+                    <div class="absolute -right-10 -top-10 text-[120px] font-inter font-black text-gray-50 pointer-events-none uppercase">
+                        AI
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-2 flex justify-between items-center relative z-10 tracking-tight">
+                        대량 VOC 자동 분류 시스템 PoC
+                        <span class="text-[9px] font-inter text-gray-400 border border-gray-100 px-2 py-1 uppercase tracking-wider">CJ AX WAVE 교육 과정 내 프로젝트</span>
+                    </h3>
+                    <p class="text-[11px] font-mono text-gray-500 mb-6 tracking-tight relative z-10">Tech : n8n, OpenAI GPT-4o, RAG, Supabase</p>
+                    <div class="bg-gray-50 border border-gray-100 p-5 text-[13px] relative z-10 mb-8 rounded-none font-light text-gray-600">
+                        <p class="mb-3"><strong class="text-black font-inter tracking-wider uppercase text-[11px]">Problem:</strong> 텍스트 형태로 비정형 유입되는 대량의 브랜드사 VOC 분류 작업 시 발생하는 물리적인 리소스 과다 소모 병목 현상을 해결하고자 했습니다.</p>
+                        <p class="mb-3"><strong class="text-black font-inter tracking-wider uppercase text-[11px]">Execution:</strong> OpenAI API 기반 모델을 활용해 VOC 텍스트 샘플 데이터를 임베딩 가공 후 Supabase 벡터 DB에 적재하고, 리콜/부작용 등 중대 이슈 유입 시 즉시 담당자 우회 알림을 송출하는 Human-in-the-Loop 안전 장치 연동 구조를 검증했습니다.</p>
+                        <p class="pt-3 border-t border-gray-200"><strong class="text-accent font-inter tracking-wider uppercase text-[11px]">Result:</strong> 300건 샘플 데이터 교차 검증 적용 기준, 수동 VOC 분류에 소요되던 총 업무 시간 90% 단축 및 핵심 리스크 엣지 케이스 필터링 100% 자동 구현을 검증했습니다.</p>
+                    </div>
+
+                    <div class="mb-8 relative z-10">
+                        <div class="border border-gray-100 bg-white overflow-hidden group cursor-pointer relative sk-border">
+                            <img src="./assets/ai-voc-2.png" class="w-full h-auto object-cover transition duration-700" alt="Pipeline Architecture" />
+                        </div>
+                        <p class="text-center text-[10px] text-gray-400 mt-3 font-inter tracking-widest uppercase">n8n 기반 VOC 라우팅 오케스트레이션 설계</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+                        <div class="flex flex-col gap-4">
+                            <div class="h-32 border border-gray-100 bg-white overflow-hidden group cursor-pointer relative rounded-none sk-border">
+                                <img src="./assets/ai-voc-1.png" class="w-full h-full object-contain transition duration-500" alt="Data Extraction" />
+                            </div>
+                            <div>
+                                <strong class="text-black block mb-2 text-[10px] font-inter uppercase tracking-widest border-l-2 border-black pl-3">[STEP 1] Data Extract</strong>
+                                <p class="text-[12px] text-gray-500 leading-tight font-light">VOC 데이터 임베딩 및 구조화 처리.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-4">
+                            <div class="h-32 border border-gray-100 bg-white overflow-hidden group cursor-pointer relative rounded-none sk-border">
+                                <img src="./assets/ai-voc-4.png" class="w-full h-full object-contain transition duration-500" alt="AI Intelligence" />
+                            </div>
+                            <div>
+                                <strong class="text-black block mb-2 text-[10px] font-inter uppercase tracking-widest border-l-2 border-black pl-3">[Step 2] Parameter</strong>
+                                <p class="text-[12px] text-gray-500 leading-tight font-light">LLM Temperature 고정으로 객관성 확보.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-4">
+                            <div class="h-32 border border-gray-100 bg-white overflow-hidden group cursor-pointer relative rounded-none sk-border">
+                                <img src="./assets/ai-voc-3.png" class="w-full h-full object-contain transition duration-300" alt="Fallback Routing" />
+                            </div>
+                            <div>
+                                <strong class="text-black block mb-1 text-xs font-inter uppercase tracking-widest border-l-2 border-black pl-2">[Step 3] Fallback</strong>
+                                <p class="text-[13px] text-gray-400 leading-tight">치명적 키워드 우회 라우팅 설계.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="archive" class="py-24 px-6 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16">
+                <span class="text-black font-inter font-bold text-[9px] tracking-[0.3em] block mb-3 uppercase">05. Process & Comms</span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-black tracking-tighter">운영 프로세스 표준화 및 글로벌 협업 역량</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="cyber-card p-10 bg-white sk-border flex flex-col h-full">
+                    <h3 class="text-xl font-bold text-black tracking-tight">대행사 맞춤형 리스크 관리(QA) 및 교차 검증</h3>
+                    <div class="space-y-6 text-sm text-gray-600 font-light leading-relaxed flex-1 mt-6">
+                        <p><strong class="text-black font-inter tracking-[0.1em] block mb-2 text-[11px] uppercase">Action:</strong> 다수 브랜드 동시 핸들링 시 발생하는 실무 병목과 오발송 에러를 막고자 파트장에게 '교차 검증(Peer Review)' 프로세스를 전사 제안해 표준 가이드라인으로 수립했습니다.</p>
+                        <p class="pt-4 border-t border-gray-100"><strong class="text-accent block mb-2 font-inter tracking-[0.1em] text-[11px] uppercase">Result:</strong> 프로세스 도입 이후 배포 에러 0건 달성</p>
+                    </div>
+                </div>
+
+                <div class="cyber-card p-10 bg-white sk-border flex flex-col h-full">
+                    <h3 class="text-xl font-bold text-black tracking-tight">글로벌 역량 및 유관부서 커뮤니케이션</h3>
+                    <div class="space-y-6 text-sm text-gray-600 font-light leading-relaxed flex-1 mt-6">
+                        <p><strong class="text-black font-inter tracking-[0.1em] block mb-2 text-[11px] uppercase">Action:</strong> 100% 영어 환경의 IKEA Canada 현장 협업 경험과 비즈니스 ITT 1급(번역) 및 2급(통역) 자격 사항을 토대로 해외 트렌드 리서치와 대행사 및 파트너사 등 유관 채널 커뮤니케이션 리소스를 명확하고 매끄럽게 핸들링합니다.</p>
+                        <p class="pt-4 border-t border-gray-100"><strong class="text-accent block mb-2 font-inter tracking-[0.1em] text-[11px] uppercase">Result:</strong> 글로벌 마케팅 벤치마킹 데이터 취합 및 다국적 부서 협업 업무를 지연 없이 유연하게 서포트할 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-32 px-6 bg-accent text-white text-center">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <span class="font-inter font-bold text-[10px] tracking-[0.5em] text-white uppercase opacity-80">노랑풍선 CRM 마케터 포트폴리오</span>
+            <h2 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tighter break-keep">
+                데이터 분석과 CRM 운영 경험을 바탕으로,<br />
+                노랑풍선에서 고객의 여행 퍼널 전환 시나리오를 정교하게 완성하겠습니다.
+            </h2>
+            <div class="pt-12 flex flex-col md:flex-row items-center justify-center gap-4 relative z-20">
+                <a href="mailto:wkdehdgus0328@gmail.com"
+                    class="group inline-flex items-center justify-center border border-white px-10 py-4 font-inter font-bold text-xs hover:bg-white hover:text-accent transition duration-500 cursor-pointer w-full md:w-auto">
+                    <span class="uppercase tracking-[0.2em] mr-2">Email:</span>
+                    <span class="lowercase tracking-wider">wkdehdgus0328@gmail.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/donghyun-jang-2071593b3/" target="_blank"
+                    class="inline-flex items-center justify-center border border-white/30 text-white/80 px-10 py-4 font-inter font-bold text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-accent transition duration-500 cursor-pointer w-full md:w-auto">
+                    LinkedIn Profile
+                </a>
+            </div>
+
+            <p class="text-[rgba(255,255,255,0.6)] font-inter text-[10px] pt-20 tracking-widest uppercase">
+                &copy; 2026 DONGHYUN JANG. YELLOW BALLOON CRM PORTFOLIO.
+            </p>
+        </div>
+    </footer>
+
+    <div id="lightbox"
+        class="fixed inset-0 z-[100] bg-white/95 hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        <button id="lightbox-close"
+            class="absolute top-6 right-8 text-black hover:text-gray-500 text-5xl font-light transition">
+            &times;
+        </button>
+        <img id="lightbox-img" src="" alt="Enlarged view"
+            class="max-w-[90%] max-h-[90vh] object-contain border border-gray-100 shadow-none pointer-events-auto" />
+        <p class="text-gray-400 font-inter text-[10px] mt-8 tracking-[0.3em] uppercase">
+            Click to close
+        </p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // === Scroll Progress Bar ===
+            const scrollProgress = document.getElementById('scrollProgress');
+            window.addEventListener('scroll', () => {
+                const scrollTop = document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                if (scrollHeight > 0) {
+                    scrollProgress.style.width = (scrollTop / scrollHeight * 100) + '%';
+                }
+            });
+
+            // === Scroll Reveal Animation ===
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.cyber-card, section > div').forEach(el => {
+                el.classList.add('reveal');
+                revealObserver.observe(el);
+            });
+
+            // === KPI Counter Animation ===
+            function animateCounter(element, target, duration) {
+                duration = duration || 2000;
+                const startTime = performance.now();
+                function update(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    element.textContent = Math.round(target * eased).toLocaleString();
+                    if (progress < 1) requestAnimationFrame(update);
+                }
+                requestAnimationFrame(update);
+            }
+            const kpiObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        animateCounter(el, parseInt(el.dataset.target));
+                        kpiObserver.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.5 });
+            document.querySelectorAll('[data-counter]').forEach(el => kpiObserver.observe(el));
+
+            // === Mobile Menu ===
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            if (hamburgerBtn && mobileMenu) {
+                hamburgerBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+                mobileMenuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+                });
+            }
+
+            const lightbox = document.getElementById("lightbox");
+            const lightboxImg = document.getElementById("lightbox-img");
+            const closeBtn = document.getElementById("lightbox-close");
+
+            document.body.addEventListener("click", (e) => {
+                if (e.target.tagName === "IMG" && e.target.id !== "lightbox-img") {
+                    document.body.style.overflow = "hidden";
+                    lightboxImg.src = e.target.src;
+                    lightbox.classList.remove("hidden");
+                    setTimeout(() => lightbox.classList.remove("opacity-0"), 10);
+                }
+            });
+
+            const closeLightbox = () => {
+                document.body.style.overflow = "auto";
+                lightbox.classList.add("opacity-0");
+                setTimeout(() => {
+                    lightbox.classList.add("hidden");
+                    lightboxImg.src = "";
+                }, 300);
+            };
+
+            closeBtn.addEventListener("click", closeLightbox);
+            lightbox.addEventListener("click", (e) => {
+                if (e.target === lightbox || e.target.tagName === "P")
+                    closeLightbox();
+            });
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && !lightbox.classList.contains("hidden"))
+                    closeLightbox();
+            });
+        });
+    </script>
+</body>
+
+</html>
